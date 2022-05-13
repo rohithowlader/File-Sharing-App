@@ -9,7 +9,7 @@ const connectDB = () => {
     try{
     db.on("error", console.error.bind(console, "connection error: "));
     db.once("open", function () {
-        console.log("Connected successfully");
+        console.log("Database Connected successfully");
     });
 }
 catch(e)
