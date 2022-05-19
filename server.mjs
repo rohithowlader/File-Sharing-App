@@ -1,10 +1,10 @@
 import express from 'express';
 import connectDB from './config/db.mjs';
-import Router from './routes/files.mjs';
+import router  from './routes/files.mjs';
 const app = express();
-
-
-app.use('api/files', Router)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/api/files', router)
 
 
 connectDB();

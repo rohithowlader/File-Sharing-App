@@ -32,5 +32,5 @@ const fileSchema = mongoose.Schema({
     default: Date.now,
   },
 },{timestamps:true});
-const UserDB = mongoose.model("File", fileSchema);
-export default UserDB;
+const File = mongoose.model("File", fileSchema);
+export default File;
