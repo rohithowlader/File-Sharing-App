@@ -4,13 +4,12 @@ import multer from "multer";
 import File from "../models/Schema.mjs";
 import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
-import os from "os"
 
 let storage=multer.diskStorage({
-    destination:(req,file,callback) =>callback(null,'D:/'),
-    filename:(req,file,callback) =>{
+    destination:(req,file,callback) =>callback(null,process.cwd()+"/Uploads"),
+    filename:(req,file,cb) =>{
         const uniqueName =`${Date.now()}-${Math.round(Math.random()*1E9)}${path.extname(file.originalname)}`;
-        callback(null,uniqueName);
+        cb(null,uniqueName);
     }
 })
 
@@ -39,7 +38,7 @@ router.post('/', (req,res) => {
 
         //store in database
 
-
+        
         const file = new File({
             filename: req.file.filename ,
             uuid:uuidv4(),
