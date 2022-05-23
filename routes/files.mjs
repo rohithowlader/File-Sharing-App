@@ -25,9 +25,9 @@ fileRouter.post('/', (req,res) => {
     //store file
     upload(req,res, async (err) => {
     //validate request
+    console.log(req.file)
     if(!req.file)
     {
-        console.log(req.body)
         return res.json({error: 'All fields are required'})
     }
         if(err)
@@ -52,37 +52,21 @@ fileRouter.post('/', (req,res) => {
 
     })
 
-
-    //Response -> Link
 })
 
-/*
 
-let storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, 'uploads/') ,
-    filename: (req, file, cb) => {
-        const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${path.extname(file.originalname)}`;
-              cb(null, uniqueName)
-    } ,
-});
-
-let upload = multer({ storage, limits:{ fileSize: 1000000 * 100 }, }).single('myfile'); //100mb
-
-router.post('/', (req, res) => {
-    upload(req, res, async (err) => {
-      if (err) {
-        return res.status(500).send({ error: err.message });
-      }
-        const file = new File({
-            filename: req.file.filename,
-            uuid: uuidv4(),
-            path: req.file.path,
-            size: req.file.size
-        });
+    fileRouter.post('/send', async (req,res) =>{
+        const {uuid,sender,receiver}= req.body;
+        //validate request
+        if(!uuid || !sender || !receiver)
+            return res.status(422).send({error:"All fields are required"});
+        const file = File.findOne({uuid:uuid});
+        if(file.sender)
+            return res.status(422).send({error: "Email already sent"});
+        file.sender= sender;
+        file.receiver=receiver;
         const response = await file.save();
-        res.json({ file: `${process.env.APP_BASE_URL}/files/${response.uuid}` });
-      });
-});
-*/
+    })
+
 
 export default fileRouter;

@@ -18,6 +18,9 @@ app.set('view engine', 'ejs');
 
 
 //Routing
+app.get('/', (req, res) => {
+    res.render('index')
+})
 app.use('/api/files', fileRouter);
 app.use('/files', showRouter);
 app.use('/files/download', downloadRouter);

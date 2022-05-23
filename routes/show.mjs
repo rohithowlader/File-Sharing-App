@@ -22,3 +22,8 @@ showRouter.get('/:uuid',async (req,res)=>{
     }
 })
 export default showRouter;
+/*
+MONGO_CONNECTION_URL="mongodb+srv://admin:admin@cluster0.3akzx.mongodb.net/Url_Shortner?retryWrites=true&w=majority"
+
+APP_BASE_URL=http://localhost:3000
+*/
