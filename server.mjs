@@ -1,7 +1,8 @@
 import express from 'express';
 import connectDB from './config/db.mjs';
-import router  from './routes/files.mjs';
-import router2  from './routes/show.mjs';
+import fileRouter  from './routes/files.mjs';
+import showRouter  from './routes/show.mjs';
+import downloadRouter from './routes/download.mjs'
 import path from 'path';
 connectDB();
 
@@ -17,8 +18,9 @@ app.set('view engine', 'ejs');
 
 
 //Routing
-app.use('/api/files', router);
-app.use('/files',router2);
+app.use('/api/files', fileRouter);
+app.use('/files', showRouter);
+app.use('/files/download', downloadRouter);
 
 const PORT= process.env.PORT || 3000;
 app.listen(PORT, () =>{

@@ -1,8 +1,8 @@
 import express from "express";
-var router2 = express.Router();
+var showRouter = express.Router();
 import File from '../models/Schema.mjs';
 
-router2.get('/:uuid',async (req,res)=>{
+showRouter.get('/:uuid',async (req,res)=>{
     try{
         const file= await File.findOne({uuid: req.params["uuid"]});
         if(!file)
@@ -21,4 +21,4 @@ router2.get('/:uuid',async (req,res)=>{
         console.log(e);
     }
 })
-export default router2;
+export default showRouter;

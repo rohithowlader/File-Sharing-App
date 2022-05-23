@@ -1,5 +1,5 @@
 import express from "express";
-var router = express.Router();
+var fileRouter = express.Router();
 import multer from "multer";
 import File from "../models/Schema.mjs";
 import { v4 as uuidv4 } from 'uuid';
@@ -20,7 +20,7 @@ let upload=multer({
 }).single('myfile'); 
 
 
-router.post('/', (req,res) => {
+fileRouter.post('/', (req,res) => {
     
     //store file
     upload(req,res, async (err) => {
@@ -85,4 +85,4 @@ router.post('/', (req, res) => {
 });
 */
 
-export default router;
+export default fileRouter;
