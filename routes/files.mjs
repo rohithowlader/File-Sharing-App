@@ -1,15 +1,16 @@
 import express from "express";
-var fileRouter = express.Router();
+var router = express.Router();
 import multer from "multer";
 import File from "../models/Schema.mjs";
 import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
+import os from "os"
 
 let storage=multer.diskStorage({
     destination:(req,file,callback) =>callback(null,process.cwd()+"/Uploads"),
-    filename:(req,file,cb) =>{
+    filename:(req,file,callback) =>{
         const uniqueName =`${Date.now()}-${Math.round(Math.random()*1E9)}${path.extname(file.originalname)}`;
-        cb(null,uniqueName);
+        callback(null,uniqueName);
     }
 })
 
@@ -20,14 +21,14 @@ let upload=multer({
 }).single('myfile'); 
 
 
-fileRouter.post('/', (req,res) => {
+router.post('/', (req,res) => {
     
     //store file
     upload(req,res, async (err) => {
     //validate request
-    console.log(req.file)
     if(!req.file)
     {
+        console.log(req.body)
         return res.json({error: 'All fields are required'})
     }
         if(err)
@@ -38,7 +39,7 @@ fileRouter.post('/', (req,res) => {
 
         //store in database
 
-        
+
         const file = new File({
             filename: req.file.filename ,
             uuid:uuidv4(),
@@ -54,19 +55,4 @@ fileRouter.post('/', (req,res) => {
 
 })
 
-
-    fileRouter.post('/send', async (req,res) =>{
-        const {uuid,sender,receiver}= req.body;
-        //validate request
-        if(!uuid || !sender || !receiver)
-            return res.status(422).send({error:"All fields are required"});
-        const file = File.findOne({uuid:uuid});
-        if(file.sender)
-            return res.status(422).send({error: "Email already sent"});
-        file.sender= sender;
-        file.receiver=receiver;
-        const response = await file.save();
-    })
-
-
-export default fileRouter;
+export default router;

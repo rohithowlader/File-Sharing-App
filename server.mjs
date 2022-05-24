@@ -4,6 +4,7 @@ import fileRouter  from './routes/files.mjs';
 import showRouter  from './routes/show.mjs';
 import downloadRouter from './routes/download.mjs'
 import path from 'path';
+import res from 'express/lib/response';
 connectDB();
 
 const app = express();
@@ -15,12 +16,11 @@ app.set('views', path.join(process.cwd(),"/views"));
 app.set('view engine', 'ejs');
 
 
-
+app.get('/',(req,res)=>{
+    res.render('index');
+})
 
 //Routing
-app.get('/', (req, res) => {
-    res.render('index')
-})
 app.use('/api/files', fileRouter);
 app.use('/files', showRouter);
 app.use('/files/download', downloadRouter);
