@@ -4,7 +4,6 @@ import fileRouter  from './routes/files.mjs';
 import showRouter  from './routes/show.mjs';
 import downloadRouter from './routes/download.mjs'
 import path from 'path';
-import res from 'express/lib/response';
 connectDB();
 
 const app = express();
