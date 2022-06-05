@@ -49,6 +49,7 @@ router.post('/', (req,res) => {
 
         //Response -> Link
         const response = await file.save();
+        console.log
         return res.redirect(`${process.env.APP_BASE_URL}/files/${response.uuid}`)
 
     })
