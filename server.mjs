@@ -2,7 +2,8 @@ import express from 'express';
 import connectDB from './config/db.mjs';
 import fileRouter  from './routes/files.mjs';
 import showRouter  from './routes/show.mjs';
-import downloadRouter from './routes/download.mjs'
+import downloadRouter from './routes/download.mjs';
+import sendEmailRouter from './routes/sendEmail.mjs'
 import path from 'path';
 connectDB();
 
@@ -23,6 +24,7 @@ app.get('/',(req,res)=>{
 app.use('/api/files', fileRouter);
 app.use('/files', showRouter);
 app.use('/files/download', downloadRouter);
+app.use('/files/download/email', sendEmailRouter);
 
 const PORT= process.env.PORT || 3000;
 app.listen(PORT, () =>{

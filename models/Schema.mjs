@@ -11,6 +11,14 @@ const fileSchema = mongoose.Schema({
     type: String,
     requied: true,
   },
+  link: {
+    type: String,
+    requied: true,
+  },
+  downloadLink: {
+    type: String,
+    requied: true,
+  },
   size: {
     type: String,
     requied: true,

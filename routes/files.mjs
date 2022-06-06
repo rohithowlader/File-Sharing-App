@@ -38,19 +38,24 @@ router.post('/', (req,res) => {
         
 
         //store in database
-
-
+        var uuidGenerate=uuidv4();
+        var linkGenerate=`${process.env.APP_BASE_URL}/files/${uuidGenerate}`;
+        var downloadLink="Not Generated yet";
         const file = new File({
             filename: req.file.filename ,
-            uuid:uuidv4(),
+            uuid:uuidGenerate,
             path:req.file.path,
             size:req.file.size,
+            link:linkGenerate,
+            downloadLink:downloadLink,
+            sender:null,
+            receiver:null
         })
-
+        
+        
         //Response -> Link
         const response = await file.save();
-        console.log
-        return res.redirect(`${process.env.APP_BASE_URL}/files/${response.uuid}`)
+        return res.redirect(`${linkGenerate}`)
 
     })
 
