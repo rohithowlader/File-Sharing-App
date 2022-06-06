@@ -11,7 +11,6 @@ showRouter.get('/:uuid', async (req, res) => {
         const filter = { uuid: req.params.uuid };
         const update = { downloadLink: `${process.env.APP_BASE_URL}/files/download/${file.uuid}` };
 
-        // `doc` is the document _before_ `update` was applied
         let doc = await File.findOneAndUpdate(filter, update);
         return res.render('download', {
             uuid: file.uuid,

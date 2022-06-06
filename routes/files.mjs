@@ -4,7 +4,6 @@ import multer from "multer";
 import File from "../models/Schema.mjs";
 import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
-import os from "os"
 
 let storage=multer.diskStorage({
     destination:(req,file,callback) =>callback(null,process.cwd()+"/Uploads"),
@@ -17,7 +16,7 @@ let storage=multer.diskStorage({
 
 let upload=multer({
     storage,
-    limits: {fileSize: 1000000 *100} //100 mb conveted to bytes
+    limits: {fileSize: 1000000 *100} //100 mb Limit.  conveted to bytes
 }).single('myfile'); 
 
 
@@ -28,7 +27,6 @@ router.post('/', (req,res) => {
     //validate request
     if(!req.file)
     {
-        console.log(req.body)
         return res.json({error: 'All fields are required'})
     }
         if(err)

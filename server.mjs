@@ -8,8 +8,8 @@ import path from 'path';
 connectDB();
 
 const app = express();
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-
 
 //Template engine
 app.set('views', path.join(process.cwd(),"/views"));
