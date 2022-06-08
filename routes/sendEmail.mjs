@@ -46,7 +46,7 @@ sendEmailRouter.post('/', async (req, res) => {
             to: `${req.body.receiver}`,
             subject: `File shared by ${req.body.sender}`,
             text: `Hi! ${req.body.sender} Shared a file. Link is 
-            ${req.body.downloadLink} `
+            ${req.body.downloadLink} `+`Please download it within 2 days.`
         };
         if (!isValidReceiver || !isValidSender) {
             return res.status(500).send("Wrong Email input");
