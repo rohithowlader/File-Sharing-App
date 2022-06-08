@@ -57,7 +57,7 @@ sendEmailRouter.post('/', async (req, res) => {
                 console.log('Email Sent Successfully');
             });
             return res.render('emailSent', {
-                sender: req.body.sender,
+                receiver: req.body.receiver,
                 fileName: req.body.downloadLink
             });
         }
