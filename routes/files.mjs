@@ -37,7 +37,7 @@ router.post('/', (req,res) => {
 
         //store in database
         var uuidGenerate=uuidv4();
-        var linkGenerate=`https://filesharewebsiteapp.azurewebsites.net/files/${uuidGenerate}`;
+        var linkGenerate=`${process.env.APP_BASE_URL}/files/${uuidGenerate}`;
         var downloadLink="Not Generated yet";
         const file = new File({
             filename: req.file.filename ,
