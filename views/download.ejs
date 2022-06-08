@@ -52,7 +52,7 @@
     </a>
     <p>Click on the link to download your file</p>
     <h5>You can send the link via email</h5>
-        <form action="http://localhost:3000/files/download/email/" method="post" >
+        <form action="<%= process.env.APP_BASE_URL %>/files/download/email/" method="post" >
             <h2>Enter to send email</h2>
             <label for="sender">Enter Sender email</label>
             <input type="email" name="sender" id="sender"><br><br>
