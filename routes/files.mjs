@@ -4,6 +4,7 @@ import multer from "multer";
 import File from "../models/Schema.mjs";
 import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
+import deleteFile from "./deletefile.mjs"
 
 let storage=multer.diskStorage({
     destination:(req,file,callback) =>callback(null,process.cwd()+"/Uploads"),
@@ -53,6 +54,8 @@ router.post('/', (req,res) => {
         
         //Response -> Link
         const response = await file.save();
+        setTimeout(deleteFile, 172800000, req.file.path);
+        
         return res.redirect(`${linkGenerate}`)
 
     })
