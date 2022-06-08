@@ -1,9 +1,8 @@
 FROM node:latest
 COPY . .
 RUN npm install
-EXPOSE 3000
+EXPOSE 300
 CMD [ "node", "server.mjs" ]
-
 
 
 
