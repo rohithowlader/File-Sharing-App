@@ -1,5 +1,5 @@
 import express from 'express';
-var downloadRouter = express.Router();
+let downloadRouter = express.Router();
 import File from '../models/Schema.mjs';
 import fs from "fs";
 

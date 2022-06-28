@@ -1,5 +1,5 @@
 import express from "express";
-var showRouter = express.Router();
+let showRouter = express.Router();
 import File from '../models/Schema.mjs';
 
 showRouter.get('/:uuid', async (req, res) => {
