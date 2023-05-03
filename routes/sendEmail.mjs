@@ -27,17 +27,14 @@ sendEmailRouter.post('/', async (req, res) => {
 
         let doc = await File.findOneAndUpdate(filter, update);
         const file = await File.findOne({ downloadLink: req.body.downloadLink });
-
+        let testAccount = await nodemailer.createTestAccount();
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                type: 'OAuth2',
                 user: process.env.EMAIL,
                 pass: process.env.PASSWORD,
-                clientId: process.env.CLIENT_ID,
-                clientSecret: process.env.CLIENT_SECRET,
-                refreshToken: process.env.REFRESH_TOKEN
+                
             }
         });
 
